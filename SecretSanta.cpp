@@ -6,7 +6,12 @@
 #include <fstream>
 #include <filesystem>
 
-SecretSanta::SecretSanta() : rng(std::random_device{}()) {}
+// SecretSanta::SecretSanta() : rng(std::random_device{}()) {}
+
+SecretSanta::SecretSanta() 
+    : rng(std::random_device{}() ^ 
+          (std::mt19937::result_type)std::chrono::steady_clock::now().time_since_epoch().count()) {}
+
 
 void SecretSanta::addParticipant(const std::string& name) {
     participants.push_back(name);
@@ -47,7 +52,7 @@ void SecretSanta::generateAssignments() {
     validateAssignments();
 }
 
-// void SecretSanta::printAssignments() const {
+// void SecretSanta::printAssignmentsDebug() const {
 //     std::cout << "Secret Santa Assignments:\n";
 //     std::cout << "----------------------\n";
 //     for (const auto& assignment : assignments) {

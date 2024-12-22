@@ -20,6 +20,7 @@ public:
     void addParticipant(const std::string& name);
     void generateAssignments();
     void printAssignments() const;
+    // void printAssignmentsDebug() const;
 };
 
 #endif // SECRET_SANTA_H
