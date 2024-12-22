@@ -3,6 +3,8 @@
 #include <iostream>
 #include <algorithm>
 #include <stdexcept>
+#include <fstream>
+#include <filesystem>
 
 SecretSanta::SecretSanta() : rng(std::random_device{}()) {}
 
@@ -45,10 +47,31 @@ void SecretSanta::generateAssignments() {
     validateAssignments();
 }
 
+// void SecretSanta::printAssignments() const {
+//     std::cout << "Secret Santa Assignments:\n";
+//     std::cout << "----------------------\n";
+//     for (const auto& assignment : assignments) {
+//         std::cout << assignment.first << " gets a gift for " << assignment.second << std::endl;
+//     }
+// }
+
 void SecretSanta::printAssignments() const {
-    std::cout << "Secret Santa Assignments:\n";
-    std::cout << "----------------------\n";
+    std::string folderName = "SecretSantaAssignments";
+
+    std::filesystem::create_directory(folderName);
+
     for (const auto& assignment : assignments) {
-        std::cout << assignment.first << " gets a gift for " << assignment.second << std::endl;
+        std::string filename = folderName + "/" + assignment.first + "_assignment.txt";
+
+        std::ofstream outFile(filename);
+
+        if (outFile.is_open()) {
+            outFile << "Hello " << assignment.first << "!\n";
+            outFile << "You are the Secret Santa for " << assignment.second << ".\n";
+            outFile << "Keep it a secret and enjoy the holiday spirit!\n";
+            outFile.close(); 
+        } else {
+            std::cerr << "Error: Could not create file for " << assignment.first << std::endl;
+        }
     }
 }

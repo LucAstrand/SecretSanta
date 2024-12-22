@@ -29,7 +29,7 @@ cd SecretSanta
 2. Compile the project:
 
 ```bash
-g++ -std=c++17 SecretSanta.cpp main.cpp -o SecretSanta
+g++ -std=c++17 SecretSanta.cpp main.cpp -o SecretSanta -lstdc++fs
 ```
 
 ## Usage
@@ -52,12 +52,13 @@ Edit the `main.cpp` file to add or remove participants:
     //add participants here...
 ```
 
-## Example output 
+## Output 
 
-```bash
-Secret Santa Assignments:
-----------------------
-Ally gets a gift for Lucas
-Lucas gets a gift for Ben
-Ben gets a gift for Ally
+The Assignments will be saved to a directory named `SecretSantaAssignments`, and will be of the form:
+
 ```
+Hello  <First Name>
+You are the Secret Santa for <Second Name>
+Keep it a secret and enjoy the holiday spirit!
+```
+
